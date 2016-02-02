@@ -34,6 +34,10 @@ matrix:
     - php: 7.0
     - php: hhvm
 
+before_install:
+  - composer require phpunit/phpunit:4.8.* satooshi/php-coveralls:dev-master
+  - composer install --dev
+
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
   - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
@@ -42,11 +46,12 @@ before_script:
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-script: phpunit --configuration phpunit_$DB.xml --coverage-clover ./tests/logs/clover.xml
+script: 
+  - ./vendor/bin/phpunit --configuration phpunit_$DB.xml --coverage-clover ./tests/logs/clover.xml
+ 
+after_script:
+- php vendor/bin/coveralls -v
 
-after_success:
-  - coveralls -v
-  
 # configure notifications (email, IRC, campfire etc)
 notifications:
   slack: 'mukuru:$SLACK_TOKEN#notificatons'
