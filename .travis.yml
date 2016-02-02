@@ -45,7 +45,7 @@ before_script:
 script: phpunit --configuration phpunit_$DB.xml --coverage-clover ./tests/logs/clover.xml
 
 after_success:
-  - bin/coveralls -v
+  - coveralls -v
   
 # configure notifications (email, IRC, campfire etc)
 notifications:
