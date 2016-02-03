@@ -1,3 +1,12 @@
+# blacklist & whitelist branches
+# branches:
+#   except:
+#     - experimental
+
+branches:
+  only:
+    - master
+
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
 
