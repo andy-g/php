@@ -43,5 +43,15 @@ class HelloWorldTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('Bar', $helloWorld->what());
     }
+    
+    public function testHelloCount()
+    {
+        $helloWorld = new HelloWorld($this->pdo);
+
+        $helloWorld->hello('One');
+        $helloWorld->hello('Two');
+
+        $this->assertEquals(2, $helloWorld->hello_count());
+    }
 }
 
