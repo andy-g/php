@@ -26,4 +26,11 @@ class HelloWorld
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchColumn();
     }
+    
+    public function hello_count()
+    {
+        $sql = "SELECT count(what) FROM hello";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchColumn();
+    }    
 }
